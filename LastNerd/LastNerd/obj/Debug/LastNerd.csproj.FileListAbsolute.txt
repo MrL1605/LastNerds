@@ -1,0 +1,9 @@
+C:\VS Solutions\LastNerd\LastNerd\bin\Debug\LastNerd.exe.config
+C:\VS Solutions\LastNerd\LastNerd\bin\Debug\LastNerd.exe
+C:\VS Solutions\LastNerd\LastNerd\bin\Debug\LastNerd.pdb
+C:\VS Solutions\LastNerd\LastNerd\obj\Debug\LastNerd.csprojResolveAssemblyReference.cache
+C:\VS Solutions\LastNerd\LastNerd\obj\Debug\FormMain.resources
+C:\VS Solutions\LastNerd\LastNerd\obj\Debug\LastNerd.csproj.GenerateResource.Cache
+C:\VS Solutions\LastNerd\LastNerd\obj\Debug\LastNerd.exe
+C:\VS Solutions\LastNerd\LastNerd\obj\Debug\LastNerd.pdb
+C:\VS Solutions\LastNerd\LastNerd\bin\Debug\Supremes.dll
