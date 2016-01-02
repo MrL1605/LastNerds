@@ -14,9 +14,9 @@ A Desktop Application for Windows to download LastNerds Comics.
 ## Usage
 
 
- - Download the [setup zip file][releases] from lastest releas.
- - Install it using setup.exe in your Windows.
- - Open the Application (Search in Start Menu as LastNerd)
+ - Download the [zip file][releases] from lastest releas.
+ - Extract it anywhere.
+ - Open the LastNerd.exe.
  - And Click on `RUN`.
 
 
