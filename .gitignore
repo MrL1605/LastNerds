@@ -1,4 +1,10 @@
 # Files I don't like
-
 *~
+
+# Debug and other folders
+Debug/
+publish/
+
+# Installation zip file
+*.zip
 

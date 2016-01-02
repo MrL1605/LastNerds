@@ -8,13 +8,17 @@ A Desktop Application for Windows to download LastNerds Comics.
 **Support them on [Patreon][patreon]**
 ---
 
+## Version
+4.8.3.6
 
 ## Usage
 
-Download the [exe file][exe_download].
-And Click on `RUN`.
 
-> **Note:**  Beware it is in Development stage, so expect errors.
+ - Download the [setup zip file][releases] from lastest releas.
+ - Install it using setup.exe in your Windows.
+ - Open the Application (Search in Start Menu as LastNerd)
+ - And Click on `RUN`.
+
 
 # Bugs and feature requests
 
@@ -33,7 +37,7 @@ Huge thanks to Matt for this incredible comic. You can find him on [Twitch][twit
 
 
 [comic_url]: <http://lastnerdsonearth.com/>
-[exe_download]: <https://github.com/MrL1605/LastNerds/blob/master/LastNerd/LastNerd/bin/Debug/LastNerd.exe?raw=true>
+[releases]: <https://github.com/MrL1605/LastNerds/releases/>
 [licence]:<https://github.com/MrL1605/LastNerds/blob/master/LICENSE>
 [twitch]:<http://www.twitch.tv/MattMelvin>
 [issue]:<https://github.com/MrL1605/LastNerds/issues>
