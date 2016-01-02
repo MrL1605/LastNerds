@@ -1,11 +1,11 @@
 # LastNerds
----
+
 A Desktop Application for Windows to download LastNerds Comics.
 
 [The Last Nerds on Earth][comic_url] is one of my favorite webcomics, and I was learning Windows Form Application. 
 
 ## Usage
----
+
 
 Download the [exe file][exe_download].
 And Click on `RUN`.
@@ -13,17 +13,17 @@ And Click on `RUN`.
 > **Note:**  Beware it is in Development stage, so expect errors.
 
 # Bugs and feature requests
----
+
 
 Have a bug or a feature request? If your problem or idea is not addressed yet, [please open a new issue][issue].
 
 # License
----
+
 
 Code released under the [MIT license][licence].
 
 # Credits
----
+
 
 Huge thanks to Matt for this incredible comic. You can find him on [Twitch][twitch]. 
 
