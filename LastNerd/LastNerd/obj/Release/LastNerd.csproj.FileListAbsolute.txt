@@ -1,0 +1,13 @@
+F:\git_things\LastNerds\LastNerd\LastNerd\bin\Release\LastNerd.exe.config
+F:\git_things\LastNerds\LastNerd\LastNerd\bin\Release\LastNerd.exe
+F:\git_things\LastNerds\LastNerd\LastNerd\bin\Release\LastNerd.pdb
+F:\git_things\LastNerds\LastNerd\LastNerd\bin\Release\Supremes.dll
+F:\git_things\LastNerds\LastNerd\LastNerd\obj\Release\FormMain.resources
+F:\git_things\LastNerds\LastNerd\LastNerd\obj\Release\LastNerd.csproj.GenerateResource.Cache
+F:\git_things\LastNerds\LastNerd\LastNerd\obj\Release\LastNerd.exe
+F:\git_things\LastNerds\LastNerd\LastNerd\obj\Release\LastNerd.pdb
+F:\git_things\LastNerds\LastNerd\LastNerd\bin\Release\LastNerd.exe.manifest
+F:\git_things\LastNerds\LastNerd\LastNerd\bin\Release\LastNerd.application
+F:\git_things\LastNerds\LastNerd\LastNerd\obj\Release\LastNerd.TrustInfo.xml
+F:\git_things\LastNerds\LastNerd\LastNerd\obj\Release\LastNerd.exe.manifest
+F:\git_things\LastNerds\LastNerd\LastNerd\obj\Release\LastNerd.application

@@ -10,44 +10,35 @@ using Supremes.Nodes;
 
 public class FormMain : Form
 {
-    private TextBox logger_tb;
     private BackgroundWorker AsyncTask;
     private ProgressBar progress_bar;
-    private BackgroundWorker AsyncFileDownload;
     private Button browse_bt;
     private Label label1;
     private TextBox folder_path_tb;
     private FolderBrowserDialog folder_dialog;
     private Button run_bt;
-    String folder_path = "";
+    private TextBox logger_tb;
+    private Button exit_bt;
+    public String folder_path = "";
+    
 
     #region Windows Code
     private void InitializeComponent()
     {
-            this.logger_tb = new System.Windows.Forms.TextBox();
             this.run_bt = new System.Windows.Forms.Button();
             this.AsyncTask = new System.ComponentModel.BackgroundWorker();
             this.progress_bar = new System.Windows.Forms.ProgressBar();
-            this.AsyncFileDownload = new System.ComponentModel.BackgroundWorker();
             this.browse_bt = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.folder_path_tb = new System.Windows.Forms.TextBox();
             this.folder_dialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.logger_tb = new System.Windows.Forms.TextBox();
+            this.exit_bt = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // logger_tb
-            // 
-            this.logger_tb.Location = new System.Drawing.Point(41, 54);
-            this.logger_tb.Multiline = true;
-            this.logger_tb.Name = "logger_tb";
-            this.logger_tb.ReadOnly = true;
-            this.logger_tb.Size = new System.Drawing.Size(601, 266);
-            this.logger_tb.TabIndex = 0;
-            this.logger_tb.Text = "Logs :";
             // 
             // run_bt
             // 
-            this.run_bt.Location = new System.Drawing.Point(267, 380);
+            this.run_bt.Location = new System.Drawing.Point(178, 371);
             this.run_bt.Name = "run_bt";
             this.run_bt.Size = new System.Drawing.Size(149, 51);
             this.run_bt.TabIndex = 1;
@@ -68,13 +59,6 @@ public class FormMain : Form
             this.progress_bar.Name = "progress_bar";
             this.progress_bar.Size = new System.Drawing.Size(601, 23);
             this.progress_bar.TabIndex = 2;
-            // 
-            // AsyncFileDownload
-            // 
-            this.AsyncFileDownload.WorkerReportsProgress = true;
-            this.AsyncFileDownload.DoWork += new System.ComponentModel.DoWorkEventHandler(this.AsyncFileDownload_DoWork);
-            this.AsyncFileDownload.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.AsyncFileDownload_ProgressChanged);
-            this.AsyncFileDownload.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.AsyncFileDownload_RunWorkerCompleted);
             // 
             // browse_bt
             // 
@@ -102,19 +86,47 @@ public class FormMain : Form
             this.folder_path_tb.Size = new System.Drawing.Size(231, 20);
             this.folder_path_tb.TabIndex = 5;
             // 
+            // logger_tb
+            // 
+            this.logger_tb.Location = new System.Drawing.Point(41, 50);
+            this.logger_tb.Multiline = true;
+            this.logger_tb.Name = "logger_tb";
+            this.logger_tb.ReadOnly = true;
+            this.logger_tb.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.logger_tb.Size = new System.Drawing.Size(601, 286);
+            this.logger_tb.TabIndex = 6;
+            this.logger_tb.Text = "Logs :";
+            // 
+            // exit_bt
+            // 
+            this.exit_bt.Location = new System.Drawing.Point(349, 371);
+            this.exit_bt.Name = "exit_bt";
+            this.exit_bt.Size = new System.Drawing.Size(149, 51);
+            this.exit_bt.TabIndex = 7;
+            this.exit_bt.Text = "Exit";
+            this.exit_bt.UseVisualStyleBackColor = true;
+            this.exit_bt.Click += new System.EventHandler(this.exit_bt_Click);
+            // 
             // FormMain
             // 
-            this.ClientSize = new System.Drawing.Size(680, 503);
+            this.ClientSize = new System.Drawing.Size(680, 474);
+            this.Controls.Add(this.exit_bt);
+            this.Controls.Add(this.logger_tb);
             this.Controls.Add(this.folder_path_tb);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.browse_bt);
             this.Controls.Add(this.progress_bar);
             this.Controls.Add(this.run_bt);
-            this.Controls.Add(this.logger_tb);
             this.Name = "FormMain";
             this.ResumeLayout(false);
             this.PerformLayout();
 
+    }
+
+    public static void Main()
+    {
+        FormMain fm = new FormMain();
+        Application.Run(fm);
     }
     #endregion
 
@@ -122,13 +134,6 @@ public class FormMain : Form
     {
         InitializeComponent();
         progress_bar.Hide();
-    }
-
-    public static void Main()
-    {
-        FormMain fm = new FormMain();
-        Application.Run(fm);
-    
     }
 
     private void run_bt_Click(object sender, EventArgs e)
@@ -143,176 +148,142 @@ public class FormMain : Form
         5. Continue checking and downloading until last released comic is found.
          */
 
-        String page_addr = "/ch3p50";
-        String address = "http://www.lastnerdsonearth.com/img/ch1/ch1p01_i-stole-that-line-from-myself.png";
+        run_bt.Enabled = false;
+
+        logger_tb.Text += Environment.NewLine;
+
         if (folder_path.Equals(""))
         {
-            var t = new Thread((ThreadStart)(() =>
-            {
-                DialogResult dialog_res = folder_dialog.ShowDialog();
-                if (dialog_res.Equals(DialogResult.OK))
-                {
-                    folder_path = folder_dialog.SelectedPath;
-                }
-            }));
-
-            t.SetApartmentState(ApartmentState.STA);
-            t.Start();
-            t.Join();
-            folder_path_tb.Text = folder_path;
+            show_browse_bt();
         }
+        if (folder_path.Equals(""))
+            return;
         DirectoryInfo di = new DirectoryInfo(folder_path);
         if (!di.Exists)
         {
             di.Create();
         }
-        //AsyncTask.RunWorkerAsync(page_addr);
-        //progress_bar.Show();
-        AsyncFileDownload.RunWorkerAsync(address);
-        /*
-        FileInfo fi = new FileInfo("F:\\Ch01P01.png");
-        logger_tb.Text += Environment.NewLine + "";
-        if (fi.Exists)
-        {
-            logger_tb.Text += "Exists";
-        }
-        else
-        {
-            logger_tb.Text += "Nope";
-        }
-        */
+
+        String first_comic = "/ch1p01";
+        // run html parser on first page
+        // it will download image file if it does not exists
+        // it will also execute next html parser and so on.
+        progress_bar.Show();
+        AsyncTask.RunWorkerAsync(first_comic);
 
     }
 
-    #region Async using Task
-    public void get_resp(string address)
-    {
-            var data = Task.Run(() =>
-            {
-                string href_val = "href", img_url = "imgUrl";
-                HttpWebRequest req;
-                HttpWebResponse res = null;
-                try
-                {
+    String curr_comic_page = "";
 
-                    req = (HttpWebRequest)WebRequest.Create("http://www.lastnerdsonearth.com" + address);
-                    res = (HttpWebResponse)req.GetResponse();
-                    Stream stream = res.GetResponseStream();
-                    StreamReader sr = new StreamReader(stream);
-                    String str_data = sr.ReadToEnd();
-                    /*
-                    var file_path = "F:\\MaImage.png";
-                    using (var fs = File.Create(file_path))
-                    {
-                        stream.CopyTo(fs);
-                    }
-                    */
-
-                    Document doc = Dcsoup.Parse(str_data);
-                    Element content_ele = doc.GetElementById("content");
-                    // Might be last
-                    if (content_ele.Child(0).Attr("src").Equals("you-could-be-reading.png"))
-                    {
-                        // Yes last :P
-                        href_val = "None";
-                        img_url = "http://lastnerdsonearth.com/patreon/you-could-be-reading.png";
-                        res.Close();
-                        return href_val;
-                    }
-                    else
-                    {
-                        Element a_tag = content_ele.Child(2);
-                        Element img_tag = a_tag.Select("img").First;
-                        href_val = a_tag.Attr("href");
-                        img_url = img_tag.Attr("src");
-                    }
-
-                }
-                finally
-                {
-                    if (res != null)
-                        res.Close();
-                }
-                Console.WriteLine(href_val);
-                address = href_val;
-                return href_val;
-            });
-
-        String nxt_href = data.Result;
-        logger_tb.Text += Environment.NewLine + "Donwload complete -  " + nxt_href;
-        if (!nxt_href.Equals("None")){
-            get_resp(nxt_href);
-        }
-        else
-        {
-            logger_tb.Text += Environment.NewLine + "X Complete -  ";
-        }
-
-    }
-    #endregion
-
-    #region AsyncTask HTML decoder
+    #region AsyncTask HTML decoder with Image Download
     private void AsyncTask_DoWork(object sender, DoWorkEventArgs e)
     {
-        String href_val = "href", img_url = "imgUrl", address = e.Argument as String;
+        String img_download_url, href_val;
+        // Partial url of HTML page of comic
+        curr_comic_page = e.Argument as String;
         HttpWebRequest req;
         HttpWebResponse res = null;
         try
         {
-            AsyncTask.ReportProgress(10);
+            #region HTML Download and Parser 
 
-            req = (HttpWebRequest)WebRequest.Create("http://www.lastnerdsonearth.com" + address);
-            res = (HttpWebResponse)req.GetResponse();
+            AsyncTask.ReportProgress(10);
+            req = (HttpWebRequest)WebRequest.Create("http://www.lastnerdsonearth.com" + curr_comic_page);
+            try
+            {
+                res = (HttpWebResponse)req.GetResponse();
+            }
+            catch
+            {
+                Console.WriteLine("Ended badly");
+                e.Result = "Down";
+                return;
+            }
             Stream stream = res.GetResponseStream();
             StreamReader sr = new StreamReader(stream);
             String str_data = sr.ReadToEnd();
-            /*
-            var file_path = "F:\\MaImage.png";
-            using (var fs = File.Create(file_path))
-            {
-                stream.CopyTo(fs);
-            }
-            */
 
-            AsyncTask.ReportProgress(50);
-
+            AsyncTask.ReportProgress(30);
+            
+            // Parse HTML data to extract image
             Document doc = Dcsoup.Parse(str_data);
             Element content_ele = doc.GetElementById("content");
-            // Might be last
+            // Check if last Image
             if (content_ele.Child(0).Attr("src").Equals("you-could-be-reading.png"))
             {
-                // Yes last :P
+                // Yes then substitute None ot curr url to stop proceeding
                 href_val = "None";
-                img_url = "http://lastnerdsonearth.com/patreon/you-could-be-reading.png";
+                img_download_url = "http://lastnerdsonearth.com/patreon/you-could-be-reading.png";
                 res.Close();
                 e.Result = href_val;
-
                 AsyncTask.ReportProgress(100);
                 return ;
             }
             else
             {
+                // If no extract next page url and current image url.
                 Element a_tag = content_ele.Child(2);
                 Element img_tag = a_tag.Select("img").First;
                 href_val = a_tag.Attr("href");
-                img_url = img_tag.Attr("src");
-                String img_file_name = UrlToFile(img_url);
-                if (!(new FileInfo(img_file_name)).Exists)
-                {
-                    AsyncFileDownload.RunWorkerAsync(img_url);
-                }
-
+                img_download_url = img_tag.Attr("src");
             }
 
-            AsyncTask.ReportProgress(80);
+            #endregion
 
+            AsyncTask.ReportProgress(60);
+
+            // Check if comic file exists
+            // and download if not
+            String img_file_name = UrlToFile(img_download_url);
+            Console.WriteLine("File Name  " + img_file_name);
+            if (!(new FileInfo(folder_path + "\\" + img_file_name)).Exists)
+            {
+
+                #region Download Image File
+                req = (HttpWebRequest)WebRequest.Create(img_download_url);
+                try
+                {
+                    res = (HttpWebResponse)req.GetResponse();
+                } catch
+                {
+                    e.Result = "Down";
+                    return;
+                }
+                stream = res.GetResponseStream();
+                #endregion
+
+                AsyncTask.ReportProgress(80);
+
+                #region Save downloaded image to file in specified Location
+                var file_path = folder_path + "\\" + UrlToFile(img_download_url);
+                using (var fs = File.Create(file_path))
+                {
+                    AsyncTask.ReportProgress(50);
+                    stream.CopyTo(fs);
+                }
+                stream.Close();
+                #endregion
+
+            }
+            else
+            {
+                // File Exists
+                AsyncTask.ReportProgress(62);
+            }
+            AsyncTask.ReportProgress(90);
+
+        }
+        catch
+        {
+            Console.WriteLine("Ended badly");
+            e.Result = "Down";
+            return;
         }
         finally
         {
             if (res != null)
                 res.Close();
         }
-        address = href_val;
         e.Result = href_val;
         AsyncTask.ReportProgress(100);
 
@@ -320,74 +291,47 @@ public class FormMain : Form
 
     private void AsyncTask_ProgressChanged(object sender, ProgressChangedEventArgs e)
     {
-        
-        logger_tb.Text += e.ProgressPercentage + "%  , ";
+        if(e.ProgressPercentage == 62)
+        {
+            logger_tb.Text += "File Exsits Skipping Download.";
+        }
+        logger_tb.Text += e.ProgressPercentage + "%, ";
         progress_bar.Value = e.ProgressPercentage;
 
     }
 
     private void AsyncTask_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
     {
-        logger_tb.Text += "Complete" + Environment.NewLine;
-        
+
         String href_nxt = e.Result as String;
-        if (!href_nxt.Equals("None"))
+        if (href_nxt.Equals("Down"))
         {
-            AsyncTask.RunWorkerAsync(href_nxt);
+            logger_tb.Text += "Website Down or Network Connection Problem" + Environment.NewLine;
         }
-    }
-    #endregion
+        else {
 
-    #region Async File Download
-    private void AsyncFileDownload_DoWork(object sender, DoWorkEventArgs e)
-    {
-        String address = e.Argument as String;
-        HttpWebRequest req;
-        HttpWebResponse res = null;
-        try
-        {
-            AsyncFileDownload.ReportProgress(10);
-
-            req = (HttpWebRequest)WebRequest.Create(address);
-            res = (HttpWebResponse)req.GetResponse();
-            Stream stream = res.GetResponseStream();
-
-            var file_path = folder_path + "\\" + UrlToFile(address);
-            using (var fs = File.Create(file_path))
+            if (!href_nxt.Equals("None"))
             {
-                AsyncFileDownload.ReportProgress(50);
-                stream.CopyTo(fs);
+                // Call next HTML parser
+                logger_tb.Text += " - Complete - " + curr_comic_page + Environment.NewLine;
+                AsyncTask.RunWorkerAsync(href_nxt);
             }
-            stream.Close();
-            AsyncFileDownload.ReportProgress(80);
-
+            else
+            {
+                run_bt.Enabled = true;
+                logger_tb.Text += Environment.NewLine +  Environment.NewLine + "Latest Released Comic " + curr_comic_page + Environment.NewLine + "Download Fully Completed.";
+            }
         }
-        finally
-        {
-            if (res != null)
-                res.Close();
-            
-        }
-        e.Result = "Done";
-        AsyncFileDownload.ReportProgress(100);
-
     }
-
-    private void AsyncFileDownload_ProgressChanged(object sender, ProgressChangedEventArgs e)
-    {
-        logger_tb.Text += e.ProgressPercentage + "%, ";
-
-    }
-
-    private void AsyncFileDownload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-    {
-        logger_tb.Text += "Completed " + Environment.NewLine;
-    }
-
     #endregion
-
+    
     #region Browse Button
     private void browse_bt_Click(object sender, EventArgs ea)
+    {
+        show_browse_bt();
+    }
+
+    public void show_browse_bt()
     {
         var t = new Thread((ThreadStart)(() =>
         {
@@ -404,6 +348,7 @@ public class FormMain : Form
         folder_path_tb.Text = folder_path;
 
     }
+
     #endregion
 
     #region Url to File Namer
@@ -411,8 +356,18 @@ public class FormMain : Form
     {
 
         String[] splited = Url.Split('/');
-        return splited[splited.Length - 1];
+        String server_file_name = splited[splited.Length - 1];
+        String[] splited_ = server_file_name.Split('_');
+        return splited_[0]+ ".png";
     }
+
+
     #endregion
+
+    private void exit_bt_Click(object sender, EventArgs e)
+    {
+
+        Close();
+    }
 }
 
