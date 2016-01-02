@@ -7,3 +7,12 @@ C:\VS Solutions\LastNerd\LastNerd\obj\Debug\LastNerd.csproj.GenerateResource.Cac
 C:\VS Solutions\LastNerd\LastNerd\obj\Debug\LastNerd.exe
 C:\VS Solutions\LastNerd\LastNerd\obj\Debug\LastNerd.pdb
 C:\VS Solutions\LastNerd\LastNerd\bin\Debug\Supremes.dll
+F:\git_things\LastNerds\LastNerd\LastNerd\bin\Debug\LastNerd.exe.config
+F:\git_things\LastNerds\LastNerd\LastNerd\obj\Debug\LastNerd.exe
+F:\git_things\LastNerds\LastNerd\LastNerd\obj\Debug\LastNerd.pdb
+F:\git_things\LastNerds\LastNerd\LastNerd\bin\Debug\LastNerd.exe
+F:\git_things\LastNerds\LastNerd\LastNerd\bin\Debug\LastNerd.pdb
+F:\git_things\LastNerds\LastNerd\LastNerd\bin\Debug\Supremes.dll
+F:\git_things\LastNerds\LastNerd\LastNerd\obj\Debug\LastNerd.csprojResolveAssemblyReference.cache
+F:\git_things\LastNerds\LastNerd\LastNerd\obj\Debug\FormMain.resources
+F:\git_things\LastNerds\LastNerd\LastNerd\obj\Debug\LastNerd.csproj.GenerateResource.Cache
