@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LastNerds</string>
+    <string name="last_nerds_des_str">The Last Nerds Logo</string>
+    <string name="logs_tv_str">Logs :</string>
+    <string name="run_bt_str">RUN</string>
+    <string name="view_str">View Comic</string>
+</resources>
