@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name="com.orm.SugarApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,7 +20,21 @@
         </activity>
 
         <activity android:name=".MainActivity"/>
+        <activity android:name=".ViewComics"/>
 
+        <!-- Meta data for Sugar ORM required for SQLLite-->
+        <meta-data
+            android:name="DATABASE"
+            android:value="course_sugar.db" />
+        <meta-data
+            android:name="VERSION"
+            android:value="18" />
+        <meta-data
+            android:name="QUERY_LOG"
+            android:value="false" />
+        <meta-data
+            android:name="DOMAIN_PACKAGE_NAME"
+            android:value="co.mrl" />
 
     </application>
 

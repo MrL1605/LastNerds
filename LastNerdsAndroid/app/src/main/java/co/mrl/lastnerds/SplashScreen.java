@@ -23,7 +23,7 @@ public class SplashScreen extends Activity {
                 finish();
                 startActivity(new Intent(getBaseContext(), MainActivity.class));
             }
-        }, 1000);
+        }, 2000);
 
 
     }

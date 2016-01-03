@@ -1,5 +1,6 @@
 package co.mrl.lastnerds;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     public TextView logs_tv;
     public ProgressBar pro_bar;
     public Button run_bt;
+    int seq_num = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +49,19 @@ public class MainActivity extends AppCompatActivity {
             dir.mkdirs();
         }
 
+        findViewById(R.id.view_bt).setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+
+                startActivity(new Intent(getBaseContext(), ViewComics.class));
+
+            }
+        });
 
         run_bt.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
 
-                String first_comic = "/ch3p53";
+                seq_num = 1;
+                String first_comic = "/ch1p01";
                 run_bt.setEnabled(false);
                 pro_bar.setVisibility(View.VISIBLE);
                 new CheckAndDownload().execute(first_comic);
@@ -63,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
         String curr_comic_page = "";
 
-
         @Override protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
             if (values[0].equals("62")) {
@@ -75,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override protected void onPostExecute(String s) {
-
             super.onPostExecute(s);
             if (s.equals("Down")) {
                 append_text("\nWebsite Down or Network Connection Problem\n");
@@ -84,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 if (!s.equals("Last")) {
                     append_text(" - Complete - " + curr_comic_page + "\n");
+                    seq_num += 1;
                     new CheckAndDownload().execute(s);
                 } else {
                     run_bt.setEnabled(true);
@@ -161,6 +171,14 @@ public class MainActivity extends AppCompatActivity {
                     FileOutputStream fos = new FileOutputStream(file);
                     fos.write(output.toByteArray());
                     fos.close();
+
+                    List<ImagesTable> first_row = ImagesTable.find(ImagesTable.class, "seq=?", seq_num + "");
+                    if (first_row.size() <= 0){
+                        int count = Integer.parseInt(ImagesTable.count(ImagesTable.class) + "") + 1;
+                        ImagesTable new_image = new ImagesTable(img_file_name, count);
+                        new_image.save();
+                    }
+
 
                 } else {
                     // File Exists
