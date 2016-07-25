@@ -4,6 +4,7 @@
 # Debug and other folders
 Debug/
 publish/
+Comics/
 
 # Installation zip file
 *.zip

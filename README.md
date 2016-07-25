@@ -9,7 +9,7 @@ A Desktop Application for Windows to download LastNerds Comics.
 ---
 
 ## Version
-4.8.3.6
+5.3.4.6
 
 ## Usage
 
